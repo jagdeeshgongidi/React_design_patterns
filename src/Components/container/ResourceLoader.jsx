@@ -1,37 +1,41 @@
-import React, { useState, useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import axios from 'axios'
-const UserLoader = ({ userID, children }) => {
-    const [user, setUser] = useState(null)
+const ResourceLoader = ({ resourceUrl, resourceName, children }) => {
+    const [state, setState] = useState(null)
+
     useEffect(() => {
         let isMounted = true
         const controller = new AbortController();
         (async () => {
             try {
-                const response = await axios.get(`api/users/${userID}`, { signal: controller.signal })
-                console.log(response.data)
-                isMounted && setUser(response.data)
+                const resource = await axios.get(resourceUrl, { signal: controller.signal });
+                isMounted && setState(resource.data)
+                console.log(resource.data)
             } catch (err) {
                 console.log(err)
             }
         })();
+
         return () => {
             isMounted = false
             isMounted && controller.abort()
         }
 
-    }, [userID])
+
+    }, [resourceUrl])
     return (
         <>
             {
                 React.Children.map(children, child => {
                     if (React.isValidElement(child)) {
-                        return React.cloneElement(child, { user })
+                        return React.cloneElement(child, { [resourceName]: state })
                     }
                     return child
-                })
+                }
+                )
             }
         </>
     )
 }
 
-export default UserLoader
+export default ResourceLoader

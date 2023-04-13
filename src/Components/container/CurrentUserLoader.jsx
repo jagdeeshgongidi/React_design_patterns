@@ -15,9 +15,8 @@ const CurrentUserLoader = ({ children }) => {
         (async () => {
             try {
                 const response = await axios.get("api/current-user", { signal: controller.signal, timeout: 5000 });
-                const userData = await response.data
-                setUser(userData)
-                console.log(userData)
+                setUser(response.data)
+
             } catch (err) {
                 console.log(err)
             }

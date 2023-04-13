@@ -13,6 +13,8 @@ import CurrentUserLoader from "./Components/container/CurrentUserLoader"
 
 
 import UserInfo from "./Components/Layout/people/UserInfo"
+import UserLoader from "./Components/container/UserLoader"
+import ResourceLoader from "./Components/container/ResourceLoader"
 // const LeftHandComponent=({name})=>{
 //   return <h1>{name}</h1>
 // }
@@ -53,18 +55,21 @@ import UserInfo from "./Components/Layout/people/UserInfo"
 
 const people = [
   {
+    id: 1,
     name: "Jagadeesh",
     age: 21,
     hairColor: "black",
     hobbies: ["coding", 'singing', 'reading']
   },
   {
+    id: 2,
     name: "June",
     age: 21,
     hairColor: "black",
     hobbies: ["coding", 'singing', 'reading']
   },
   {
+    id: 3,
     name: "John",
     age: 21,
     hairColor: "black",
@@ -74,7 +79,9 @@ const people = [
 ]
 
 const products = [
+
   {
+    id: 1,
     name: "laptop",
     price: '$200',
     description: "A 15 inch portable screen with computing functionality",
@@ -82,6 +89,7 @@ const products = [
 
   },
   {
+    id: 2,
     name: "fan",
     price: '$50',
     description: "A motor with 3 wings that sweeps air ",
@@ -89,6 +97,7 @@ const products = [
 
   },
   {
+    id: 3,
     name: "Phone",
     price: '$100',
     description: "A small device that can cause so many problems",
@@ -123,6 +132,7 @@ const products = [
 
 
 const App = () => {
+
   return (
     <>
       {/* <RegularList items={people} resourceName="user" itemComponent={SmallPeopleListItem} />
@@ -130,9 +140,12 @@ const App = () => {
         <ProductInfo product={products[0]} />
       </Modal> */}
 
-      <CurrentUserLoader>
+      <ResourceLoader resourceName="user" resourceUrl="api/users/1">
         <UserInfo />
-      </CurrentUserLoader>
+      </ResourceLoader>
+      <ResourceLoader resourceName="product" resourceUrl="api/products/1">
+        <ProductInfo />
+      </ResourceLoader>
 
     </>
   )

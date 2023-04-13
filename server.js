@@ -12,20 +12,24 @@ let currentUser = {
 }
 
 
-let users = [
+let users1 = [
     {
+        id: 1,
         name: "Jagadeesh",
         age: 21,
         hairColor: "black",
         hobbies: ["coding", 'singing', 'reading']
     },
     {
+        id: 2,
         name: "June",
         age: 21,
         hairColor: "black",
         hobbies: ["coding", 'singing', 'reading']
     },
     {
+        id: 3,
+
         name: "John",
         age: 21,
         hairColor: "black",
@@ -39,6 +43,7 @@ let users = [
 
 const products = [
     {
+        id: 1,
         name: "laptop",
         price: '$200',
         description: "A 15 inch portable screen with computing functionality",
@@ -46,6 +51,7 @@ const products = [
 
     },
     {
+        id: 2,
         name: "fan",
         price: '$50',
         description: "A motor with 3 wings that sweeps air ",
@@ -53,6 +59,7 @@ const products = [
 
     },
     {
+        id: 3,
         name: "Phone",
         price: '$100',
         description: "A small device that can cause so many problems",
@@ -66,24 +73,25 @@ app.get("/api/current-user", (req, res) => {
     res.json(currentUser)
 })
 app.get("/api/users/:id", (req, res) => {
-    const { id } = req.params;
-    res.json(users.find(user => user.id === id))
+    let id = parseInt(req.params.id);
+
+    console.log(id);
+    const user = users1.find(user => {
+        return user.id == id
+    })
+    console.log(user);
+    res.json(user)
 }
 )
 
 
-app.post("/api/users/:id", (req, res) => {
-    const { id } = req.params;
-    const { user: updatedUser } = req.body;
-    users = users.map(user => user.id === id ? updatedUser : user)
-    res.json(users.find(user => user.id === id))
-})
+
 
 
 app.get("/api/users", (req, res) => {
     console.log("hello");
     res.setHeader('Content-Type', 'application/json');
-    res.json(users);
+    res.json(users1);
 });
 
 
@@ -93,8 +101,14 @@ app.get("/api/products", (req, res) => {
 
 
 app.get("/api/products/:id", (req, res) => {
-    const { id } = req.params;
-    res.json(products[id])
+    const id = parseInt(req.params.id);
+    console.log(id)
+    console.log("hello")
+    const product = products.find(product => {
+        return product.id == id
+    })
+    console.log(product)
+    res.json(product)
 })
 
 
