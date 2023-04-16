@@ -15,6 +15,8 @@ import CurrentUserLoader from "./Components/container/CurrentUserLoader"
 import UserInfo from "./Components/Layout/people/UserInfo"
 import UserLoader from "./Components/container/UserLoader"
 import ResourceLoader from "./Components/container/ResourceLoader"
+import DataSource from "./Components/container/DataSource"
+import axios from "axios"
 // const LeftHandComponent=({name})=>{
 //   return <h1>{name}</h1>
 // }
@@ -128,29 +130,76 @@ const products = [
 
 
 
-//modal
+// //modal
+// const getServerData = url => async () => {
+//   const response = await axios.get(url)
+//   return response.data
+// }
+// const getLocalData = key => () => {
+//   console.log(key)
+//   return localStorage.getItem(key)
+// }
 
 
+// const Text = ({ message }) => {
+//   console.log("text", message)
+//   return <h1>{message}</h1>
+// }
+
+// const App = () => {
+
+//   return (
+//     <>
+//       {/* <RegularList items={people} resourceName="user" itemComponent={SmallPeopleListItem} />
+//       <Modal>
+//         <ProductInfo product={products[0]} />
+//       </Modal> */}
+//       {/* 
+//       <ResourceLoader resourceName="user" resourceUrl="api/users/1">
+//         <UserInfo />
+//       </ResourceLoader>
+//       <ResourceLoader resourceName="product" resourceUrl="api/products/1">
+//         <ProductInfo />
+//       </ResourceLoader> */}
+
+
+
+//       <DataSource getDataFunc={getServerData("/api/users/1")} resourceName='user'>
+//         <UserInfo />
+//       </DataSource>
+
+//       <DataSource getDataFunc={getLocalData("message")} resourceName='message'>
+//         <Text />
+//       </DataSource>
+
+//     </>
+//   )
+// }
+
+
+
+// export default App
+
+
+
+import UnControlledForm from "./Components/uncontrolledcomponents/UnControlledForm";
+import ControlledForm from "./Components/controlledcomponents/ControlledForm";
+import UnControlledModel from "./Components/uncontrolledcomponents/UnControlledModel"
+import ControlledModel from "./Components/controlledcomponents/ControlledModel"
+import React, { useState } from "react";
 const App = () => {
+  const [shouldShowModal, setShowShouldShowModal] = useState(false)
+  const toggleModel = () => {
+    setShowShouldShowModal(!shouldShowModal)
+  }
 
   return (
     <>
-      {/* <RegularList items={people} resourceName="user" itemComponent={SmallPeopleListItem} />
-      <Modal>
-        <ProductInfo product={products[0]} />
-      </Modal> */}
-
-      <ResourceLoader resourceName="user" resourceUrl="api/users/1">
-        <UserInfo />
-      </ResourceLoader>
-      <ResourceLoader resourceName="product" resourceUrl="api/products/1">
-        <ProductInfo />
-      </ResourceLoader>
-
+      <button onClick={toggleModel}>{shouldShowModal ? "hide model" : "Show model"}</button>
+      <ControlledModel onRequestClose={toggleModel} shouldShow={shouldShowModal} >
+        <h1>HI welcome to design patterns </h1>
+      </ControlledModel >
     </>
   )
 }
-
-
-
 export default App

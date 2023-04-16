@@ -1,7 +1,5 @@
 import React, { useState } from 'react'
 import styled from 'styled-components'
-
-
 const ModalBackground = styled.div`
     position:fixed;
     z-index:1;
@@ -19,27 +17,32 @@ const ModalBody = styled.div`
     width: 50%;
 `;
 
-const Modal = ({ children }) => {
+
+const UnControlledModel = ({ children }) => {
     const [shouldShow, setShouldShow] = useState(false)
     return (
         <>
             <button onClick={() => setShouldShow(true)}>Show Modal</button>
             {shouldShow && (
                 <ModalBackground onClick={() => setShouldShow(false)}>
-                    <ModalBody onClick={(e) => e.stopPropagation()} >
-                        <button onClick={() => setShouldShow(false)}> Hide Modal</button>
+                    <ModalBody onClick={(e) => e.stopPropagation()}>
+                        <button onClick={() => setShouldShow(false)}>Hide Modal</button>
                         {
                             children
                         }
                     </ModalBody>
-                </ModalBackground>)
+
+                </ModalBackground>
+            )
             }
-            {/* what the propagation  function is doing is that when ever user clicks on modal body
-            it defaults adds a click event and closes the modal
-            to prevent that behavior we are using stop propgation ()
-            onClick={(e) => e.stopPropagation()}  */}
+
         </>
     )
+
+
 }
 
-export default Modal
+export default UnControlledModel
+
+//here the model is unControlled because we are not controlling the state of the model
+//the model it self decides when to show and hide
