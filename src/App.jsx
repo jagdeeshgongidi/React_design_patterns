@@ -114,71 +114,73 @@ const products = [
 
 
 
-// const App = () => {
-//   return (
-//     <div>
-//       <RegularList items={people} resourceName="person" itemComponent={SmallPeopleListItem} />
-//       <NumberedListItem items={people} resourceName="person" itemComponent={LargePeopleListItem} />
+const App = () => {
+  return (
+    <div>
+      <RegularList items={people} resourceName="person" itemComponent={SmallPeopleListItem} />
+      <NumberedListItem items={people} resourceName="person" itemComponent={LargePeopleListItem} />
 
-//       <NumberedListItem items={products} resourceName="product" itemComponent={LargeProductLIstItem} />
+      <NumberedListItem items={products} resourceName="product" itemComponent={LargeProductLIstItem} />
 
-//       <RegularList items={products} resourceName="product" itemComponent={SmallProductListItem} />
-//     </div>
-//   )
-// }
-
-
-
-
-// //modal
-// const getServerData = url => async () => {
-//   const response = await axios.get(url)
-//   return response.data
-// }
-// const getLocalData = key => () => {
-//   console.log(key)
-//   return localStorage.getItem(key)
-// }
-
-
-// const Text = ({ message }) => {
-//   console.log("text", message)
-//   return <h1>{message}</h1>
-// }
-
-// const App = () => {
-
-//   return (
-//     <>
-//       {/* <RegularList items={people} resourceName="user" itemComponent={SmallPeopleListItem} />
-//       <Modal>
-//         <ProductInfo product={products[0]} />
-//       </Modal> */}
-//       {/* 
-//       <ResourceLoader resourceName="user" resourceUrl="api/users/1">
-//         <UserInfo />
-//       </ResourceLoader>
-//       <ResourceLoader resourceName="product" resourceUrl="api/products/1">
-//         <ProductInfo />
-//       </ResourceLoader> */}
+      <RegularList items={products} resourceName="product" itemComponent={SmallProductListItem} />
+    </div>
+  )
+}
 
 
 
-//       <DataSource getDataFunc={getServerData("/api/users/1")} resourceName='user'>
-//         <UserInfo />
-//       </DataSource>
 
-//       <DataSource getDataFunc={getLocalData("message")} resourceName='message'>
-//         <Text />
-//       </DataSource>
-
-//     </>
-//   )
-// }
-
+//modal
+const getServerData = url => async () => {
+  const response = await axios.get(url)
+  return response.data
+}
+const getLocalData = key => () => {
+  console.log(key)
+  return localStorage.getItem(key)
+}
 
 
-// export default App
+const Text = ({ message }) => {
+  console.log("text", message)
+  return <h1>{message}</h1>
+}
+
+
+
+const App = () => {
+
+  return (
+    <>
+      {/* <RegularList items={people} resourceName="user" itemComponent={SmallPeopleListItem} />
+      <Modal>
+        <ProductInfo product={products[0]} />
+      </Modal> */}
+      {/* 
+      <ResourceLoader resourceName="user" resourceUrl="api/users/1">
+        <UserInfo />
+      </ResourceLoader>
+      <ResourceLoader resourceName="product" resourceUrl="api/products/1">
+        <ProductInfo />
+      </ResourceLoader> */}
+
+
+
+      <DataSource getDataFunc={getServerData("/api/users/1")} resourceName='user'>
+        <UserInfo />
+      </DataSource>
+
+      <DataSource getDataFunc={getLocalData("message")} resourceName='message'>
+        <Text />
+      </DataSource>
+
+    </>
+  )
+}
+
+
+
+export default App
 
 
 
